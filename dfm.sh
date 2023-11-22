@@ -48,7 +48,7 @@ function dfmhelp() {
 # Parse command line arguments.
 case "$1" in
     create)
-        create "$@"
+        create "$2"
         ;;
     remove)
         remove "$2"
