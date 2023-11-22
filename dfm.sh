@@ -63,5 +63,6 @@ case "$1" in
           dfmhelp
         else
           echo "dfm: $1: command not found, run $0 help"
+        fi
         ;;
 esac
