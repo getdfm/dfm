@@ -1,5 +1,7 @@
 #!/bin/bash
 mkdir -p ~/.dfm/dotfiles
+prog_name="$(basename $0)"
+set -e
 
 # Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
 function create() {
@@ -31,9 +33,9 @@ function liberate() {
 
 # Print help message.
 function dfmhelp() {
-    echo "Usage: $0 [command] [arguments]"
+    echo "usage: $prog_name [command] [arguments]"
     echo ""
-    echo "Commands:"
+    echo "subcommands:"
     echo "  create   [filename]   Create a new dotfile."
     echo "  remove   [filename]   Remove a dotfile."
     echo "  occupy   [filename]   Occupy an existing dotfile."
@@ -62,7 +64,7 @@ case "$1" in
         if [ -z "$1" ]; then
           dfmhelp
         else
-          echo "dfm: $1: command not found, run $0 help"
+          echo "$1: subcommand not found, run $0 help"
         fi
         ;;
 esac
