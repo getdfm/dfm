@@ -81,14 +81,6 @@ cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
 mkdir ~/.dfm/dotfiles -p
 rm -rf ~/.dfm-copy
 echo "Installed!"
-
-if [ -f "~/.bashrc" ]; then
-echo "Do you want to control your bashrc using dfm?"
-options=("Yes" "No")
-case `select_opt "${options[@]}"` in
-    0) ~/.local/bin/dfm occupy bashrc;;
-    *) true;;
-esac
 if [ -f "~/.zshrc" ]; then
 echo "Do you want to control your zshrc using dfm?"
 options=("Yes" "No")
@@ -96,6 +88,15 @@ case `select_opt "${options[@]}"` in
     0) ~/.local/bin/dfm occupy zshrc;;
     *) true;;
 esac
+else
+if [ -f "~/.bashrc" ]; then
+echo "Do you want to control your bashrc using dfm?"
+options=("Yes" "No")
+case `select_opt "${options[@]}"` in
+    0) ~/.local/bin/dfm occupy bashrc;;
+    *) true;;
+esac
+fi
 if [ -f "~/.vimrc" ]; then
 echo "Do you want to control your vimrc using dfm?"
 options=("Yes" "No")
@@ -103,6 +104,7 @@ case `select_opt "${options[@]}"` in
     0) ~/.local/bin/dfm occupy zshrc;;
     *) true;;
 esac
+fi
 if [ -f "~/.profile" ]; then
 echo "Do you want to control your profile (login script) using dfm?"
 options=("Yes" "No")
@@ -110,7 +112,7 @@ case `select_opt "${options[@]}"` in
     0) ~/.local/bin/dfm occupy profile;;
     *) true;;
 esac
-echo "Installed!"
+fi
 echo "> Tips:"
 if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
   echo "* Add .local/bin to your PATH by adding the following lines to your login script"
