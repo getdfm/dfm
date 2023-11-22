@@ -76,7 +76,7 @@ printf "\rInstalling in 2..."; sleep 1
 printf "\rInstalling in 1..."; sleep 1
 echo -e "\rInstalling NOW...    "
 set -e
-git clone https://github.com/TylerMS887/dfm.git ~/.dfm-copy
+git clone https://github.com/getdfm/dfm.git ~/.dfm-copy
 cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
 mkdir ~/.dfm/dotfiles -p
 rm -rf ~/.dfm-copy
