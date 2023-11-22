@@ -6,7 +6,9 @@ set -e
 # Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
 function create() {
     touch ~/.dfm/dotfiles/"$1"
-    ln -s ~/.dfm/dotfiles/"$1" ~/."${1#.}"
+    if [[ ! " $@ " =~ " --no-link " ]]; then
+      ln -s ~/.dfm/dotfiles/"$1" ~/."${1#.}"
+    fi
     echo "Created dotfile $1."
 }
 
@@ -36,17 +38,17 @@ function dfmhelp() {
     echo "usage: $prog_name [command] [arguments]"
     echo ""
     echo "subcommands:"
-    echo "  create   [filename]   Create a new dotfile."
-    echo "  remove   [filename]   Remove a dotfile."
-    echo "  occupy   [filename]   Occupy an existing dotfile."
-    echo "  liberate [filename]   Liberate a dotfile from dfm."
-    echo "  help                  Print this help message."
+    echo "  create   [filename] [--no-link]   Create a new dotfile. Optionally, do not create a link."
+    echo "  remove   [filename]               Remove a dotfile."
+    echo "  occupy   [filename]               Occupy an existing dotfile."
+    echo "  liberate [filename]               Liberate a dotfile from dfm."
+    echo "  help                              Print this help message."
 }
 
 # Parse command line arguments.
 case "$1" in
     create)
-        create "$2"
+        create "$@"
         ;;
     remove)
         remove "$2"
