@@ -1,2 +1,2 @@
 # dfm
-Manage your dotfiles
+A simple **D**ot**F**ile **M**anager.
