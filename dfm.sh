@@ -1,6 +1,7 @@
 #!/bin/bash
 mkdir -p ~/.dfm/dotfiles
 prog_name="$(basename $0)"
+VER="1.0"
 set -e
 
 # Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
@@ -55,6 +56,7 @@ function dfmhelp2() {
     echo "  liberate [filename]               Liberate a dotfile from dfm."
     echo "  help                              Print the simple help message."
     echo "  help-full                         Print this help message." 
+    echo "  update                            Update to the newest version of dfm."
     echo "options:"
     echo "  -n                                Use with the create subcommand to inhibit creation of a symlink"
     echo "                                    to the traditional dotfile name."
@@ -74,11 +76,21 @@ case "$1" in
     liberate)
         liberate "$2"
         ;;
+    update)
+        echo "Downloading dfm..."
+        git clone -s https://github.com/getdfm/dfm.git ~/.dfm-copy
+        echo "Copying..."
+        cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
+        rm -rf ~/.dfm-copy
+        echo "New version installed, try dfm version"
     help)
         dfmhelp
         ;;
     help-full)
         dfmhelp2
+        ;;
+    version)
+        echo "dfm $VER"
         ;;
     *)
         if [ -z "$1" ]; then
