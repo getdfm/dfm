@@ -6,15 +6,27 @@ set -e
 
 # Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
 function create() {
+    while getopts ":n:" opt; do
+      case $opt in
+        n)
+          NO_LINK=1
+          ;;
+        \?)
+          echo "create: invalid option: -$OPTARG" >&2
+          ;;
+      esac
+    done
     touch ~/.dfm/dotfiles/"$1"
-
+    if [ "$NO_LINK" != 1 ]; then
+        ln -s ~/.dfm/dotfiles/"${1#.}" ~/."${1#.}"
+    fi
     echo "Created dotfile $1."
 }
 
 # Remove a dotfile.
 function remove() {
     rm ~/.dfm/dotfiles/"$1"
-    find / -type l -samefile "$1" -delete
+    find $HOME/ -type l -samefile "$1" -delete
     echo "Removed dotfile $1."
 }
 
@@ -43,8 +55,8 @@ function dfmhelp() {
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
     echo "  liberate [filename]               Liberate a dotfile from dfm."
-    echo "  help                              Print this help message."
-    echo "  help-full                         Print a more complex help message with options." 
+    echo "  help                              Print this help message. Pass -f to see a longer one."
+    echo "  update                            Update to the newest version of dfm."
 }
 function dfmhelp2() {
     echo "usage: $prog_name [command] [arguments]"
@@ -54,12 +66,14 @@ function dfmhelp2() {
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
     echo "  liberate [filename]               Liberate a dotfile from dfm."
-    echo "  help                              Print the simple help message."
-    echo "  help-full                         Print this help message." 
+    echo "  help                              Print this help message with -f, or a simpler one with no"
+    echo "                                    arguments."
     echo "  update                            Update to the newest version of dfm."
+    echo
     echo "options:"
-    echo "  -n                                Use with the create subcommand to inhibit creation of a symlink"
-    echo "                                    to the traditional dotfile name."
+    echo "  -n                                Use with the create subcommand to inhibit creation of a"
+    echo "                                    symlink to the traditional dotfile name."
+    echo "  -f                                Show the full help message."
 }
 
 # Parse command line arguments.
@@ -85,10 +99,21 @@ case "$1" in
         echo "New version installed, try dfm version"
         ;;
     help)
-        dfmhelp
-        ;;
-    help-full)
-        dfmhelp2
+        while getopts ":f:" opt; do
+          case $opt in
+            n)
+              FULL=1
+              ;;
+            \?)
+              echo "create: invalid option: -$OPTARG" >&2
+              ;;
+          esac
+        done
+        if [ "$FULL" = 1 ]; then
+            dfmhelp2
+        else
+            dfmhelp
+        fi
         ;;
     version)
         echo "dfm $VER"
