@@ -83,6 +83,7 @@ case "$1" in
         cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
         rm -rf ~/.dfm-copy
         echo "New version installed, try dfm version"
+        ;;
     help)
         dfmhelp
         ;;
