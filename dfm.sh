@@ -78,7 +78,7 @@ case "$1" in
         ;;
     update)
         echo "Downloading dfm..."
-        git clone -q --bare https://github.com/getdfm/dfm.git ~/.dfm-copy
+        git clone -q https://github.com/getdfm/dfm.git ~/.dfm-copy
         echo "Copying..."
         cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
         rm -rf ~/.dfm-copy
