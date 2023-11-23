@@ -9,7 +9,7 @@ function create() {
     while getopts ":n:" opt; do
       case $opt in
         n)
-          NO_LINK=1
+          export NO_LINK=1
           ;;
         \?)
           echo "create: invalid option: -$OPTARG" >&2
@@ -101,8 +101,8 @@ case "$1" in
     help)
         while getopts ":f:" opt; do
           case $opt in
-            n)
-              FULL=1
+            f)
+              export FULL=1
               ;;
             \?)
               echo "create: invalid option: -$OPTARG" >&2
