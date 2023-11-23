@@ -6,7 +6,7 @@ set -e
 
 # Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
 function create() {
-    while getopts ":n:" opt; do
+    while getopts "n" opt; do
       case $opt in
         n)
           export NO_LINK=1
@@ -99,7 +99,7 @@ case "$1" in
         echo "New version installed, try dfm version"
         ;;
     help)
-        while getopts ":f:" opt; do
+        while getopts "f" opt; do
           case $opt in
             f)
               export FULL=1
