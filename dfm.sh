@@ -6,15 +6,14 @@ set -e
 # Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
 function create() {
     touch ~/.dfm/dotfiles/"$1"
-    if [[ ! " $@ " =~ " --no-link " ]]; then
-      ln -s ~/.dfm/dotfiles/"$1" ~/."${1#.}"
-    fi
+
     echo "Created dotfile $1."
 }
 
 # Remove a dotfile.
 function remove() {
     rm ~/.dfm/dotfiles/"$1"
+    find / -type l -samefile "$1" -delete
     echo "Removed dotfile $1."
 }
 
@@ -38,11 +37,27 @@ function dfmhelp() {
     echo "usage: $prog_name [command] [arguments]"
     echo ""
     echo "subcommands:"
-    echo "  create   [filename] [--no-link]   Create a new dotfile. Optionally, do not create a link."
+    echo "  create   [filename]               Create a new dotfile. Optionally, do not create a link"
+    echo "                                    (see dfm help-full)."
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
     echo "  liberate [filename]               Liberate a dotfile from dfm."
     echo "  help                              Print this help message."
+    echo "  help-full                         Print a more complex help message with options." 
+}
+function dfmhelp2() {
+    echo "usage: $prog_name [command] [arguments]"
+    echo ""
+    echo "subcommands:"
+    echo "  create   [filename]               Create a new dotfile."
+    echo "  remove   [filename]               Remove a dotfile."
+    echo "  occupy   [filename]               Occupy an existing dotfile."
+    echo "  liberate [filename]               Liberate a dotfile from dfm."
+    echo "  help                              Print the simple help message."
+    echo "  help-full                         Print this help message." 
+    echo "options:"
+    echo "  -n                                Use with the create subcommand to inhibit creation of a symlink"
+    echo "                                    to the traditional dotfile name."
 }
 
 # Parse command line arguments.
@@ -61,6 +76,9 @@ case "$1" in
         ;;
     help)
         dfmhelp
+        ;;
+    help-full)
+        dfmhelp2
         ;;
     *)
         if [ -z "$1" ]; then
