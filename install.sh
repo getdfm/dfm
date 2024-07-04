@@ -127,7 +127,6 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     PATH="$HOME/.local/bin:$PATH"
 fi'
 fi
-echo "* If you already have highly modified dotfiles, run dfm occupy [filename without"
-echo "  dot] to occupy them."
+echo "* If you have other dotfiles, run dfm occupy [filename without dot] to occupy them."
 echo "* Create a github repository (requires GitHub CLI to be installed) to publish dotfiles"
 echo "  that HAVE NO PERSONAL DATA. Run dfm create-gh-repo to do this now."
