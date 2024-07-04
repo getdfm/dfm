@@ -94,7 +94,7 @@ case `select_opt "${options[@]}"` in
     0) ~/.local/bin/dfm occupy zshrc;;
     *) true;;
 esac
-else
+fi
 if [ -f "~/.bashrc" ]; then
 echo "Do you want to control your bashrc using dfm?"
 options=("Yes" "No")
