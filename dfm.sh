@@ -51,7 +51,7 @@ function dfmhelp() {
     echo ""
     echo "subcommands:"
     echo "  create   [filename]               Create a new dotfile. Optionally, do not create a link"
-    echo "                                    (see dfm help-full)."
+    echo "                                    (see dfm help -f)."
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
     echo "  liberate [filename]               Liberate a dotfile from dfm."
