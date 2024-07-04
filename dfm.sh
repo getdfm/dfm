@@ -55,6 +55,7 @@ function dfmhelp() {
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
     echo "  liberate [filename]               Liberate a dotfile from dfm."
+    echo "  edit                              Edit an occupied dotfile."
     echo "  help                              Print this help message. Pass -f to see a longer one."
     echo "  update                            Update to the newest version of dfm."
 }
@@ -68,6 +69,7 @@ function dfmhelp2() {
     echo "  liberate [filename]               Liberate a dotfile from dfm."
     echo "  help                              Print this help message with -f, or a simpler one with no"
     echo "                                    arguments."
+    echo "  edit                              Edit an occupied dotfile."
     echo "  update                            Update to the newest version of dfm."
     echo
     echo "options:"
