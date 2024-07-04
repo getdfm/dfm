@@ -81,6 +81,12 @@ cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
 mkdir ~/.dfm/dotfiles -p
 rm -rf ~/.dfm-copy
 echo "Installed!"
+echo "Please choose which dotfiles you want to manage."
+echo "If you use the GitHub integration, note that you"
+echo "should remove personal info from your dotfiles"
+echo "and put them in files not occupied by dfm. Then"
+echo "you can source those files through a sourcing"
+echo "command in the respective dotfiles."
 if [ -f "~/.zshrc" ]; then
 echo "Do you want to control your zshrc using dfm?"
 options=("Yes" "No")
