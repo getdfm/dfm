@@ -76,7 +76,7 @@ printf "\rInstalling in 2..."; sleep 1
 printf "\rInstalling in 1..."; sleep 1
 echo -e "\rInstalling NOW...    "
 set -e
-git clone https://github.com/getdotfiler/dotfiler.git ~/.dotfiler-copy
+git clone https://github.com/getdotfiler101/dotfiler.git ~/.dotfiler-copy
 cp ~/.dotfiler-copy/dotfiler.sh ~/.local/bin/dotfiler
 mkdir ~/.dotfiler/dotfiles -p
 rm -rf ~/.dotfiler-copy
