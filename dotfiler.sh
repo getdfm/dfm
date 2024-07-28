@@ -1,10 +1,10 @@
 #!/bin/bash
-mkdir -p ~/.dfm/dotfiles
+mkdir -p ~/.dotfiler/dotfiles
 prog_name="$(basename $0)"
 VER="1.0"
 set -e
 
-# Create a new dotfile. In ~/.dfm/dotfiles, files usually do not have a dot at the start for easier navigation.
+# Create a new dotfile. In ~/.dotfiler/dotfiles, files usually do not have a dot at the start for easier navigation.
 function create() {
     while getopts "n" opt; do
       case $opt in
@@ -16,61 +16,61 @@ function create() {
           ;;
       esac
     done
-    touch ~/.dfm/dotfiles/"$1"
+    touch ~/.dotfiler/dotfiles/"$1"
     if [ "$NO_LINK" != 1 ]; then
-        ln -s ~/.dfm/dotfiles/"${1#.}" ~/."${1#.}"
+        ln -s ~/.dotfiler/dotfiles/"${1#.}" ~/."${1#.}"
     fi
     echo "Created dotfile $1."
 }
 
 # Remove a dotfile.
 function remove() {
-    rm ~/.dfm/dotfiles/"$1"
+    rm ~/.dotfiler/dotfiles/"$1"
     find $HOME/ -type l -samefile "$1" -delete
     echo "Removed dotfile $1."
 }
 
-# Move a dotfile to ~/.dfm/dotfiles and remove first dot from basename.
+# Move a dotfile to ~/.dotfiler/dotfiles and remove first dot from basename.
 function occupy() {
-    mv ~/."$1" ~/.dfm/dotfiles/"${1#.}"
-    ln -s ~/.dfm/dotfiles/"${1#.}" ~/."${1#.}"
-    echo "$1 has now been occupied by dfm. If you plan publishing"
+    mv ~/."$1" ~/.dotfiler/dotfiles/"${1#.}"
+    ln -s ~/.dotfiler/dotfiles/"${1#.}" ~/."${1#.}"
+    echo "$1 has now been occupied by dotfiler. If you plan publishing"
     echo "please ensure the dotfiles have no personal info."
 }
 
-# Move a file out of ~/.dfm/dotfiles and add a dot to the name.
+# Move a file out of ~/.dotfiler/dotfiles and add a dot to the name.
 function liberate() {
     rm ~/."${1#.}"
-    mv ~/.dfm/dotfiles/"$1" ~/."${1#.}"
-    echo "$1 has been liberated and is no longer under dfm's control."
+    mv ~/.dotfiler/dotfiles/"$1" ~/."${1#.}"
+    echo "$1 has been liberated and is no longer under dotfiler's control."
 }
 
 # Print help message.
-function dfmhelp() {
+function dotfilerhelp() {
     echo "usage: $prog_name [command] [arguments]"
     echo ""
     echo "subcommands:"
     echo "  create   [filename]               Create a new dotfile. Optionally, do not create a link"
-    echo "                                    (see dfm help -f)."
+    echo "                                    (see dotfiler help -f)."
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
-    echo "  liberate [filename]               Liberate a dotfile from dfm."
+    echo "  liberate [filename]               Liberate a dotfile from dotfiler."
     echo "  edit                              Edit an occupied dotfile."
     echo "  help                              Print this help message. Pass -f to see a longer one."
-    echo "  update                            Update to the newest version of dfm."
+    echo "  update                            Update to the newest version of dotfiler."
 }
-function dfmhelp2() {
+function dotfilerhelp2() {
     echo "usage: $prog_name [command] [arguments]"
     echo ""
     echo "subcommands:"
     echo "  create   [filename]               Create a new dotfile."
     echo "  remove   [filename]               Remove a dotfile."
     echo "  occupy   [filename]               Occupy an existing dotfile."
-    echo "  liberate [filename]               Liberate a dotfile from dfm."
+    echo "  liberate [filename]               Liberate a dotfile from dotfiler."
     echo "  help                              Print this help message with -f, or a simpler one with no"
     echo "                                    arguments."
     echo "  edit                              Edit an occupied dotfile."
-    echo "  update                            Update to the newest version of dfm."
+    echo "  update                            Update to the newest version of dotfiler."
     echo
     echo "options:"
     echo "  -n                                Use with the create subcommand to inhibit creation of a"
@@ -93,12 +93,12 @@ case "$1" in
         liberate "$2"
         ;;
     update)
-        echo "Downloading dfm..."
-        git clone -q https://github.com/getdfm/dfm.git ~/.dfm-copy
+        echo "Downloading dotfiler..."
+        git clone -q https://github.com/getdotfiler/dotfiler.git ~/.dotfiler-copy
         echo "Copying..."
-        cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
-        rm -rf ~/.dfm-copy
-        echo "New version installed, try dfm version"
+        cp ~/.dotfiler-copy/dotfiler.sh ~/.local/bin/dotfiler
+        rm -rf ~/.dotfiler-copy
+        echo "New version installed, try dotfiler version"
         ;;
     help)
         while getopts "f" opt; do
@@ -112,17 +112,17 @@ case "$1" in
           esac
         done
         if [ "$FULL" = 1 ]; then
-            dfmhelp2
+            dotfilerhelp2
         else
-            dfmhelp
+            dotfilerhelp
         fi
         ;;
     version)
-        echo "dfm $VER"
+        echo "dotfiler $VER"
         ;;
     *)
         if [ -z "$1" ]; then
-          dfmhelp
+          dotfilerhelp
         else
           echo "$1: subcommand not found, run $0 help"
         fi
