@@ -1,2 +1,3 @@
-# dfm
-A simple **D**ot**F**ile **M**anager.
+# Dotfiler
+
+The ultimate Dotfile Manager for any distro!
