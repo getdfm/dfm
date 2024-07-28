@@ -68,7 +68,7 @@ function select_opt {
     echo $result
     return $result
 }
-echo "> dfm installer"
+echo "> dotfiler installer"
 echo
 echo "Press ctrl+c to cancel, else install will start."
 printf "\rInstalling in 3..."; sleep 1
@@ -76,46 +76,46 @@ printf "\rInstalling in 2..."; sleep 1
 printf "\rInstalling in 1..."; sleep 1
 echo -e "\rInstalling NOW...    "
 set -e
-git clone https://github.com/getdfm/dfm.git ~/.dfm-copy
-cp ~/.dfm-copy/dfm.sh ~/.local/bin/dfm
-mkdir ~/.dfm/dotfiles -p
-rm -rf ~/.dfm-copy
+git clone https://github.com/getdotfiler/dotfiler.git ~/.dotfiler-copy
+cp ~/.dotfiler-copy/dotfiler.sh ~/.local/bin/dotfiler
+mkdir ~/.dotfiler/dotfiles -p
+rm -rf ~/.dotfiler-copy
 echo "Installed!"
 echo "Please choose which dotfiles you want to manage."
 echo "If you use the GitHub integration, note that you"
 echo "should remove personal info from your dotfiles"
-echo "and put them in files not occupied by dfm. Then"
+echo "and put them in files not occupied by dotfiler. Then"
 echo "you can source those files through a sourcing"
 echo "command in the respective dotfiles."
 if [ -f "~/.zshrc" ]; then
-echo "Do you want to control your zshrc using dfm?"
+echo "Do you want to control your zshrc using dotfiler?"
 options=("Yes" "No")
 case `select_opt "${options[@]}"` in
-    0) ~/.local/bin/dfm occupy zshrc;;
+    0) ~/.local/bin/dotfiler occupy zshrc;;
     *) true;;
 esac
 fi
 if [ -f "~/.bashrc" ]; then
-echo "Do you want to control your bashrc using dfm?"
+echo "Do you want to control your bashrc using dotfiler?"
 options=("Yes" "No")
 case `select_opt "${options[@]}"` in
-    0) ~/.local/bin/dfm occupy bashrc;;
+    0) ~/.local/bin/dotfiler occupy bashrc;;
     *) true;;
 esac
 fi
 if [ -f "~/.vimrc" ]; then
-echo "Do you want to control your vimrc using dfm?"
+echo "Do you want to control your vimrc using dotfiler?"
 options=("Yes" "No")
 case `select_opt "${options[@]}"` in
-    0) ~/.local/bin/dfm occupy zshrc;;
+    0) ~/.local/bin/dotfiler occupy zshrc;;
     *) true;;
 esac
 fi
 if [ -f "~/.profile" ]; then
-echo "Do you want to control your profile (login script) using dfm?"
+echo "Do you want to control your profile (login script) using dotfiler?"
 options=("Yes" "No")
 case `select_opt "${options[@]}"` in
-    0) ~/.local/bin/dfm occupy profile;;
+    0) ~/.local/bin/dotfiler occupy profile;;
     *) true;;
 esac
 fi
@@ -127,6 +127,6 @@ if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
     PATH="$HOME/.local/bin:$PATH"
 fi'
 fi
-echo "* If you have other dotfiles, run dfm occupy [filename without dot] to occupy them."
+echo "* If you have other dotfiles, run dotfiler occupy [filename without dot] to occupy them."
 echo "* Create a github repository (requires GitHub CLI to be installed) to publish dotfiles"
-echo "  that HAVE NO PERSONAL DATA. Run dfm create-gh-repo to do this now."
+echo "  that HAVE NO PERSONAL DATA. Run dotfiler create-gh-repo to do this now."
