@@ -10,7 +10,7 @@ The ultimate Dotfile Manager for any distro!
 | remove     | Remove a dotfile.                            |
 | occupy     | Occupy an existing dotfile.                  |
 | liberate   | Liberate a dotfile from dotfiler.            |
-| help       | Print this help message with -f, or a simpler one with no arguments. |
+| help       | Print the help message.                      |
 | edit       | Edit an occupied dotfile.                    |
 | update     | Update to the newest version of dotfiler.    |
 | -n         | Use with the create subcommand to inhibit creation of a symlink to the traditional dotfile name. |
